@@ -54,8 +54,10 @@ class Main{
         int people = -1;
 
         for(int i=1;i<=n;i++){
-           Arrays.fill(is_visited,false);
-           Arrays.fill(distance,0);
+           //Arrays.fill(is_visited,false);
+           //Arrays.fill(distance,0);
+           is_visited = new boolean[n+1];
+           distance = new int[n+1];
            int val = bfs(i);
            if(val < rst){
                rst = val;
