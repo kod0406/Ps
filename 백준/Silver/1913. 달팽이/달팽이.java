@@ -32,39 +32,19 @@ class Main {
         int row = 0, col = 0;
         int dir = 0; // 0: 아래, 1: 오른쪽, 2: 위, 3: 왼쪽
 
+        int dx[] = {0,1,0,-1};
+        int dy[] = {1,0,-1,0};
         while(t>0){
-            if(dir==0){//내려가기
-                for(;row<n && ary[row][col]==0;row++){
-                    ary[row][col] = t--; //근데 이렇게 하면 +-1이 되기에 for문이 끝나면 보정 해줘야함
-                }
-                dir = 1;
-                row--;
-                col++;// ->이미 칸이 채워져 있기에 1+해줘야함
+            ary[row][col] = t--;
+            int next_col = col+dx[dir];
+            int next_row = row+dy[dir];
+            if (next_row >= n || next_col >= n || next_row < 0 || next_col < 0 || ary[next_row][next_col] != 0) { //bfs처럼 제한 두기
+                dir = (dir + 1) % 4;
+                next_row = row + dy[dir];
+                next_col = col + dx[dir];
             }
-            else if(dir==1){//우측으로 이동하기
-                for(;col<n && ary[row][col]==0;col++){
-                    ary[row][col] = t--;
-                }
-                dir = 2;
-                col--;
-                row--;
-            }
-            else if(dir==2){//올라가기
-                for(;row>=0 && ary[row][col]==0;row--){
-                    ary[row][col] = t--;
-                }
-                dir = 3;
-                row++;
-                col--;
-            }
-            else if(dir==3){//좌측으로 이동하기
-                for(;col>=0&&ary[row][col]==0;col--){
-                    ary[row][col] = t--;
-                }
-                dir = 0;
-                col++;
-                row++;
-            }
+            row = next_row;
+            col = next_col;
         }
 
         // 결과 출력 및 location 값 확인
