@@ -26,7 +26,6 @@ public class Main {
         bw.write(big.toString() + "\n");
 
         if (n <= 20) {
-            // 출력 내용이 많을 때는 BufferedWriter를 사용하여 효율적으로 출력
             hanoi(n, 1, 2, 3, bw);
         }
         
