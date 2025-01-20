@@ -1,2 +1,8 @@
 -- 코드를 입력하세요
-SELECT NAME	from animal_ins order by datetime asc limit 1;
+SELECT NAME
+FROM (
+    SELECT NAME
+    FROM animal_ins
+    ORDER BY datetime ASC
+)
+WHERE ROWNUM = 1;
